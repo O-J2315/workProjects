@@ -1,0 +1,126 @@
+body {
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+body h1,
+h2 {
+    text-align: center;
+}
+
+header {
+    border: solid 1px red;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 90%;
+    margin-bottom: 1rem;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 90%;
+    margin: 0 auto;
+    border: solid 1px red;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px red;
+    padding: .5rem;
+    margin: .5rem;
+    gap: 1rem;
+}
+
+select,
+input {
+    height: 2rem;
+    border-radius: .5rem;
+    border: solid 1px black;
+}
+
+select:focus,
+input:focus {
+    background-color: #63ff6380;
+    transition: .5s ease, transform .5s ease;
+}
+
+select:invalid,
+input:invalid {
+    background-color: rgba(255, 0, 0, 0.297);
+}
+
+#fenceGates {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+    column-gap: 1rem;
+}
+
+#fenceGates input:nth-child(odd) {
+    padding-right: 2rem;
+}
+
+#fenceGates label:nth-child(1) {
+    width: 15vw;
+}
+
+#fenceGates input {
+    width: 10vw;
+}
+
+#fenceGates select {
+    width: 25vw;
+}
+
+.calculate-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.calculate-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.calculate-button:active {
+    background-color: #3e8e41;
+    transform: scale(0.98);
+}
+
+.calculate-button:focus {
+    outline: 2px solid #5bca5b;
+}
+
+.reset-button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+}
+
+.resultsHidden {
+    display: none;
+}
+
+.resultsDisplay {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px red;
+    margin-top: 1rem;
+}

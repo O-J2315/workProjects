@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="calculator.css">
+    <title>🧮 Allied Fencing Calculator 🧮</title>
+</head>
+
+<body>
+    <header>
+        <h1>🧮 Allied Fencing</h1>
+        <h2>Calculator</h2>
+    </header>
+    <form id="myForm">
+
+        <H3>#1 Streches</H3>
+        <section id="streches">
+            <label for="s1">Stretch 1:</label>
+            <input type="float" name="stretch1" id="s1" aria-label="Stretch 1">
+
+            <label for="s2">Stretch 2:</label>
+            <input type="float" name="stretch2" id="s2" aria-label="Stretch 2">
+
+            <label for="s3">Stretch 3:</label>
+            <input type="float" name="stretch3" id="s3" aria-label="Stretch 3">
+
+            <label for="s4">Stretch 4:</label>
+            <input type="float" name="stretch4" id="s4" aria-label="Stretch 4">
+
+            <label for="s5">Stretch 5:</label>
+            <input type="float" name="stretch5" id="s5" aria-label="Stretch 5">
+
+            <label for="s6">Stretch 6:</label>
+            <input type="float" name="stretch6" id="s6" aria-label="Stretch 6">
+
+            <label for="s7">Stretch 7:</label>
+            <input type="float" name="stretch7" id="s7" aria-label="Stretch 7">
+
+            <label for="s8">Stretch 8:</label>
+            <input type="float" name="stretch8" id="s8" aria-label="Stretch 8">
+
+            <label for="s9">Stretch 9:</label>
+            <input type="float" name="stretch9" id="s9" aria-label="Stretch 9">
+
+            <label for="s10">Stretch 10:</label>
+            <input type="float" name="stretch10" id="s10" aria-label="Stretch 10">
+
+        </section>
+
+        <h3>#2 Terminal Posts</h3>
+        <section id="terminalPosts">
+            <label for="tPosts">Number of Terminal Posts</label>
+            <input type="float" name="tPosts" id="tPosts">
+        </section>
+
+        <h3>#3 Fence Height</h3>
+        <section id="fenceHeight">
+            <label for="height">Fence Height</label>
+            <select id="height" name="height" id="height">
+                <option value="" selected disabled>Select</option>
+            </select>
+        </section>
+
+        <h3>#4 Gauge of Fabric</h3>
+        <section id="fencegauge">
+            <label for="gauge">Gauge of Chain Link Fabric</label>
+            <select id="gauge" name="gauge" id="fencegauge">
+                <option value="" selected disabled>Select</option>
+            </select>
+        </section>
+
+        <h3>#5 Grade and Finish</h3>
+        <section id="gradeNfinish">
+            <label for="grade">Grade</label>
+            <select id="grade" name="grade" id="gradeNfinish">
+                <option value="" selected disabled>Select</option>
+            </select>
+            <label for="finish">Finish</label>
+            <select id="finish" name="finish" id="finish">
+                <option value="" selected disabled>Select</option>
+            </select>
+        </section>
+
+        <h3>#6 Number of Gates</h3>
+        <section id="fenceGates">
+            <label for="gates01">Gates:</label>
+            <input type="number" name="gates01" id="gates01">
+            <label for="gates1">Width:</label>
+            <select id="gates1" name="gates1" id="gates1">
+                <option value="" selected>None</option>
+            </select>
+            <label for="gates02">Gates:</label>
+            <input type="number" name="gates02" id="gates02">
+            <label for="gates2">Width:</label>
+            <select id="gates2" name="gates2" id="gates2">
+                <option value="" selected>None</option>
+            </select>
+
+        </section>
+
+
+        <button type="submit" name="submit" id="submit" class="calculate-button">Calculate</button>
+        <button type="button" id="resetButton" class="reset-button">🔄️</button>
+
+    </form>
+    <script src="calculator.js" defer></script>
+
+
+
+    <div class="resultsHidden" id="results">
+        <h1>Results</h1>
+        <h2>Cost</h2>
+        <div id="costResults">
+
+        </div>
+        <h2>Material List</h2>
+        <div id="materialListResults">
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
