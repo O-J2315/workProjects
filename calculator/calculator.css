@@ -135,6 +135,12 @@ input:invalid {
 .resultsDisplay {
     display: flex;
     flex-direction: column;
-    border: solid 1px red;
+    /* border: solid 1px red; */
     margin-top: 1rem;
+}
+
+#materialListResults h3 {
+    border-top: solid 1px black;
+    padding-top: 1rem;
+    color: rgb(203, 0, 0);
 }
