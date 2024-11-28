@@ -62,8 +62,12 @@ document.getElementById('resetButton').addEventListener('click', () => {
     form.reset();
     console.log("Form has been reset");
     console.clear();
-    document.getElementById('costResults').textContent = '';
-    document.getElementById('materialListResults').textContent = '';
+
+    document.getElementById('fabricPara').textContent = '';
+    document.getElementById('frameworkPara').textContent = '';
+    document.getElementById('fittingsPara').textContent = '';
+    document.getElementById('tiesPara').textContent = '';
+
     document.getElementById('results').setAttribute('class', 'resultsHidden');
 });
 
@@ -81,13 +85,18 @@ document.getElementById('submit').addEventListener('click', (event) => {
             StretchLinearLength += parseFloat(value);
         }
     };
-    console.log(`Total Linear Feet of chainlink: ${StretchLinearLength}`); //Fixed to next feet
+    console.log(`Total Linear Feet lenght of chainlink: ${StretchLinearLength}`); //Fixed to next feet
 
-    let terminalPosts = document.getElementById('tPosts').value;
+    let terminalPosts = parseInt(document.getElementById('tPosts').value);
     console.log(`Number of Terminal Posts: ${terminalPosts}`);
 
     let chainlinkTotalArea = parseFloat(document.getElementById('height').value) * StretchLinearLength;
-    console.log(`Square area of chaillink fence: ${chainlinkTotalArea.toFixed(2)}`);
+    let chainlinkHeight = parseInt(document.getElementById('height').value);
+    console.log(`Fence Height: ${chainlinkHeight}`);
+    console.log(`Square feet area of chaillink fence: ${chainlinkTotalArea.toFixed(2)}`);
+
+    let fabricGauge = document.getElementById('gauge').value;
+    console.log(`Fabric Gauge: ${fabricGauge}`);
 
 
 
@@ -101,5 +110,48 @@ document.getElementById('submit').addEventListener('click', (event) => {
 
 
     //Show the results
-    document.getElementById('results').setAttribute('class', 'resultsDisplay')
+    document.getElementById('results').setAttribute('class', 'resultsDisplay');
+
+    const fabricRolls = Math.ceil(StretchLinearLength / 50);
+    const topRails = Math.ceil(StretchLinearLength / 21);
+    const linePosts = Math.ceil(StretchLinearLength / 10);
+    const isCommercial = document.getElementById('grade').value === 'commercial';
+    const linePostsWidth = `2-3/8"`;
+    let terminalPostsWidth = "";
+    if (isCommercial) {
+        linePostsWidth = `2-7/8"`
+        terminalPostsWidth = `4"`;
+    } else {
+        terminalPostsWidth = `3"`;
+    };
+    const tensionBands = (chainlinkHeight - 1) * terminalPosts;
+
+
+
+
+    document.getElementById('fabricPara').innerHTML = `<p><strong>${fabricRolls}</strong> - ${chainlinkHeight}' high x ${fabricGauge}ga. Chain Link Fabric. 50' Roll</p>`;
+    const frameworkHTML = `<p><strong>${topRails}</strong> - 1-5/8" x 21' Top Rails</p>` +
+        `<p><strong>${linePosts}</strong> - ${linePostsWidth} x ${chainlinkHeight+2}' Line Posts</p>` +
+        `<p><strong>${terminalPosts}</strong> - ${terminalPostsWidth} x ${chainlinkHeight+3}' Terminal Posts</p>`;
+
+    document.getElementById('frameworkPara').innerHTML = frameworkHTML;
+
+    const fittingsHtml = `<p><strong>${linePosts}</strong> - Eye Tops / Barb Arms - ${linePostsWidth}</p>` +
+        `<p><strong>${terminalPosts}</strong> - Post Caps - ${terminalPostsWidth}</p>` +
+        `<p><strong>${terminalPosts * 2}</strong> - ${terminalPostsWidth} Brace Bands - Round</p>` +
+        `<p><strong>${terminalPosts}</strong> - Rail Ends - 1-5/8"</p>` +
+        `<p><strong>${terminalPosts}</strong> - ${chainlinkHeight}' Tension Bars</p>` +
+        `<p><strong>${tensionBands}</strong> - Tension Bands - ${terminalPostsWidth}</p>` +
+        `<p><strong>${tensionBands + (terminalPosts * 2)}</strong> - Carriage Bolts & Nuts</p>`;
+
+    document.getElementById('fittingsPara').innerHTML = fittingsHtml;
+
+    const tiesHTML = `<p><strong>${StretchLinearLength}</strong> - Easy Twist Ties - 1-5/8"</p>` +
+        `<p><strong>${chainlinkHeight * linePosts}</strong> - Easy Twist Ties - ${linePostsWidth}</p>`;
+
+    document.getElementById('tiesPara').innerHTML = tiesHTML;
+
+
+    document.getElementById('results').setAttribute('class', 'resultsDisplay');
+
 })
