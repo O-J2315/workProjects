@@ -147,7 +147,8 @@ document.getElementById('submit').addEventListener('click', (event) => {
     document.getElementById('fittingsPara').innerHTML = fittingsHtml;
 
     const tiesHTML = `<p><strong>${StretchLinearLength}</strong> - Easy Twist Ties - 1-5/8"</p>` +
-        `<p><strong>${chainlinkHeight * linePosts}</strong> - Easy Twist Ties - ${linePostsWidth}</p>`;
+        `<p><strong>${chainlinkHeight * linePosts}</strong> - Easy Twist Ties - ${linePostsWidth}</p>` +
+        `<p><strong>${StretchLinearLength}</strong> - Hog Ring Ties</p>`;
 
     document.getElementById('tiesPara').innerHTML = tiesHTML;
 
