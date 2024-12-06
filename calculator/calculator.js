@@ -116,43 +116,58 @@ document.getElementById('submit').addEventListener('click', (event) => {
     const topRails = Math.ceil(StretchLinearLength / 21);
     const linePosts = Math.ceil(StretchLinearLength / 10);
     const isCommercial = document.getElementById('grade').value === 'commercial';
-    const linePostsWidth = `2-3/8"`;
-    let terminalPostsWidth = "";
-    if (isCommercial) {
-        linePostsWidth = `2-7/8"`
-        terminalPostsWidth = `4"`;
+    const barbWireCheck = document.getElementById("barbWireCheck");
+    let linePostsWidth = `1-7/8"`;
+    let terminalPostsWidth = `2-3/8"`;
+    let terminalPostsHeight = 3;
+    let barbwireHtml = '';
+    let braceBands = terminalPosts * 2;
+
+    if (barbWireCheck.checked) {
+        braceBands = terminalPosts * 5;
+        barbWireHtml = `<p><strong>${StretchLinearLength * 3}ft</strong> Barb Wire </p>`;
     } else {
-        terminalPostsWidth = `3"`;
+        barbWireHtml = '<p><strong>No Barb Wire</strong></p>';
+    };
+
+
+    if (isCommercial) {
+        linePostsWidth = `2-3/8"`
+        terminalPostsWidth = `2-7/8"`;
+        terminalPostsHeight = chainlinkHeight + 3;
+    } else {
+        terminalPostsWidth = `2-3/8"`;
+        terminalPostsHeight = chainlinkHeight + 2;
     };
     const tensionBands = (chainlinkHeight - 1) * terminalPosts;
 
-
-
-
-    document.getElementById('fabricPara').innerHTML = `<p><strong>${fabricRolls}</strong> - ${chainlinkHeight}' high x ${fabricGauge}ga. Chain Link Fabric. 50' Roll</p>`;
-    const frameworkHTML = `<p><strong>${topRails}</strong> - 1-5/8" x 21' Top Rails</p>` +
-        `<p><strong>${linePosts}</strong> - ${linePostsWidth} x ${chainlinkHeight+2}' Line Posts</p>` +
-        `<p><strong>${terminalPosts}</strong> - ${terminalPostsWidth} x ${chainlinkHeight+3}' Terminal Posts</p>`;
+    document.getElementById('fabricPara').innerHTML = `<p><strong>${fabricRolls}</strong> -> ${chainlinkHeight}' high x ${fabricGauge}ga. Chain Link Fabric. 50' Roll. For ${StretchLinearLength}ft Chain Link</p> `;
+    const frameworkHTML = `<p><strong>${topRails}</strong> -> 1-5/8" x 21' Top Rails • CQ20 </p>` +
+        `<p><strong id="linePostsLine">${linePosts}</strong> -> ${linePostsWidth} x ${chainlinkHeight+2}' Line Posts • CQ20 </p>` +
+        `<p><strong>${terminalPosts}</strong> -> ${terminalPostsWidth} x ${terminalPostsHeight}' Terminal Posts • CQ40 </p>`;
 
     document.getElementById('frameworkPara').innerHTML = frameworkHTML;
 
-    const fittingsHtml = `<p><strong>${linePosts}</strong> - Eye Tops / Barb Arms - ${linePostsWidth}</p>` +
-        `<p><strong>${terminalPosts}</strong> - Post Caps - ${terminalPostsWidth}</p>` +
-        `<p><strong>${terminalPosts * 2}</strong> - ${terminalPostsWidth} Brace Bands - Round</p>` +
-        `<p><strong>${terminalPosts}</strong> - Rail Ends - 1-5/8"</p>` +
-        `<p><strong>${terminalPosts}</strong> - ${chainlinkHeight}' Tension Bars</p>` +
-        `<p><strong>${tensionBands}</strong> - Tension Bands - ${terminalPostsWidth}</p>` +
-        `<p><strong>${tensionBands + (terminalPosts * 2)}</strong> - Carriage Bolts & Nuts</p>`;
+    const fittingsHtml = `<p><strong>${linePosts}</strong> -> Eye Tops / Barb Arms - ${linePostsWidth}</p>` +
+        `<p><strong>${terminalPosts}</strong> -> Post Caps - ${terminalPostsWidth}</p>` +
+        `<p><strong>${braceBands}</strong> -> ${terminalPostsWidth} Brace Bands - Round</p>` +
+        `<p><strong>${terminalPosts}</strong> -> Rail Ends - 1-5/8"</p>` +
+        `<p><strong>${terminalPosts}</strong> -> ${chainlinkHeight}' Tension Bars</p>` +
+        `<p><strong>${tensionBands}</strong> -> Tension Bands - ${terminalPostsWidth}</p>` +
+        `<p><strong>${tensionBands + braceBands}</strong> -> Carriage Bolts & Nuts</p>`;
 
     document.getElementById('fittingsPara').innerHTML = fittingsHtml;
 
-    const tiesHTML = `<p><strong>${StretchLinearLength}</strong> - Easy Twist Ties - 1-5/8"</p>` +
-        `<p><strong>${chainlinkHeight * linePosts}</strong> - Easy Twist Ties - ${linePostsWidth}</p>` +
-        `<p><strong>${StretchLinearLength}</strong> - Hog Ring Ties</p>`;
+    const tiesHTML = `<p><strong>${StretchLinearLength}</strong> -> Easy Twist Ties - 1-5/8"</p>` +
+        `<p><strong>${chainlinkHeight * linePosts}</strong> -> Easy Twist Ties - ${linePostsWidth}</p>` +
+        `<p><strong>${StretchLinearLength}</strong> -> Hog Ring Ties</p>`;
 
     document.getElementById('tiesPara').innerHTML = tiesHTML;
 
 
+
+    document.getElementById("barbwirePara").innerHTML = barbWireHtml;
+
     document.getElementById('results').setAttribute('class', 'resultsDisplay');
 
-})
+});

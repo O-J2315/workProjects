@@ -19,7 +19,10 @@
 <body>
     <header>
         <img src="images/alliedfencinglogoremovebg.png" width="70" alt="logo">
-        <h1>Allied Fencing</h1>
+        <div>
+            <h1>Allied Fencing</h1>
+            <p>Your Fence Pros</p>
+        </div>
         <h2>Calculator 🧮</h2>
     </header>
     <form id="myForm">
@@ -109,6 +112,12 @@
 
         </section>
 
+        <h3>#7 Add Barb Wire</h3>
+        <section id="barbWire">
+            <label for="barbWireCheck">Add Barb Wire on Top</label>
+            <input type="checkbox" id="barbWireCheck">
+        </section>
+
 
         <button type="submit" name="submit" id="submit" class="calculate-button">Calculate</button>
         <button type="button" id="resetButton" class="reset-button">🔄️</button>
@@ -137,6 +146,9 @@
 
             <h3>Ties</h3>
             <p id="tiesPara"></p>
+
+            <h3>Barb Wire</h3>
+            <p id="barbwirePara"></p>
         </div>
     </div>
 
