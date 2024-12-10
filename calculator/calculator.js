@@ -77,12 +77,14 @@ document.getElementById('submit').addEventListener('click', (event) => {
     event.preventDefault();
 
     let StretchLinearLength = 0;
+    let stretchCounter = 0;
 
     // Loop through elements with IDs from 's1' to 's10'
     for (let i = 1; i <= 10; i++) {
         let value = document.getElementById(`s${i}`).value;
         if (!isNaN(value) && value.trim() !== "") {
             StretchLinearLength += parseFloat(value);
+            stretchCounter += 1;
         }
     };
     console.log(`Total Linear Feet lenght of chainlink: ${StretchLinearLength}`); //Fixed to next feet
@@ -114,14 +116,14 @@ document.getElementById('submit').addEventListener('click', (event) => {
 
     const fabricRolls = Math.ceil(StretchLinearLength / 50);
     const topRails = Math.ceil(StretchLinearLength / 21);
-    const linePosts = Math.ceil(StretchLinearLength / 10);
+    const linePosts = (Math.ceil(StretchLinearLength / 10)) - stretchCounter;
     const isCommercial = document.getElementById('grade').value === 'commercial';
     const barbWireCheck = document.getElementById("barbWireCheck");
     let linePostsWidth = `1-7/8"`;
     let terminalPostsWidth = `2-3/8"`;
     let terminalPostsHeight = 3;
     let barbwireHtml = '';
-    let braceBands = terminalPosts * 2;
+    let braceBands = 4 * stretchCounter;
 
     if (barbWireCheck.checked) {
         braceBands = terminalPosts * 5;
@@ -139,11 +141,11 @@ document.getElementById('submit').addEventListener('click', (event) => {
         terminalPostsWidth = `2-3/8"`;
         terminalPostsHeight = chainlinkHeight + 2;
     };
-    const tensionBands = (chainlinkHeight - 1) * terminalPosts;
+    const tensionBands = (chainlinkHeight - 1) * (stretchCounter * 2);
 
     document.getElementById('fabricPara').innerHTML = `<p><strong>${fabricRolls}</strong> -> ${chainlinkHeight}' high x ${fabricGauge}ga. Chain Link Fabric. 50' Roll. For ${StretchLinearLength}ft Chain Link</p> `;
-    const frameworkHTML = `<p><strong>${topRails}</strong> -> 1-5/8" x 21' Top Rails • CQ20 </p>` +
-        `<p><strong id="linePostsLine">${linePosts}</strong> -> ${linePostsWidth} x ${chainlinkHeight+2}' Line Posts • CQ20 </p>` +
+    const frameworkHTML = `<p><strong>${topRails}</strong> -> 1-5/8" x 21' Top Rails • SS20 </p>` +
+        `<p><strong id="linePostsLine">${linePosts}</strong> -> ${linePostsWidth} x ${chainlinkHeight+2}' Line Posts • SS20 </p>` +
         `<p><strong>${terminalPosts}</strong> -> ${terminalPostsWidth} x ${terminalPostsHeight}' Terminal Posts • CQ40 </p>`;
 
     document.getElementById('frameworkPara').innerHTML = frameworkHTML;
@@ -152,7 +154,7 @@ document.getElementById('submit').addEventListener('click', (event) => {
         `<p><strong>${terminalPosts}</strong> -> Post Caps - ${terminalPostsWidth}</p>` +
         `<p><strong>${braceBands}</strong> -> ${terminalPostsWidth} Brace Bands - Round</p>` +
         `<p><strong>${terminalPosts}</strong> -> Rail Ends - 1-5/8"</p>` +
-        `<p><strong>${terminalPosts}</strong> -> ${chainlinkHeight}' Tension Bars</p>` +
+        `<p><strong>${stretchCounter * 2}</strong> -> ${chainlinkHeight}' Tension Bars</p>` +
         `<p><strong>${tensionBands}</strong> -> Tension Bands - ${terminalPostsWidth}</p>` +
         `<p><strong>${tensionBands + braceBands}</strong> -> Carriage Bolts & Nuts</p>`;
 
@@ -163,6 +165,12 @@ document.getElementById('submit').addEventListener('click', (event) => {
         `<p><strong>${StretchLinearLength}</strong> -> Hog Ring Ties</p>`;
 
     document.getElementById('tiesPara').innerHTML = tiesHTML;
+
+    const tensionwireHtml = `<p><strong>${StretchLinearLength}</strong>ft -> Tension Wire</p>`;
+    document.getElementById('tensionwirePara').innerHTML = tensionwireHtml;
+
+    const concreteHtml = `<p><strong>${(linePosts+terminalPosts)*2}</strong> -> 50lbs Fast Setting Concrete Bags</p>`;
+    document.getElementById('concretePara').innerHTML = concreteHtml;
 
 
 
