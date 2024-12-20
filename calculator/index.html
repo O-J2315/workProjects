@@ -97,19 +97,39 @@
 
         <h3>#6 Number of Gates</h3>
         <section id="fenceGates">
-            <label for="gates01">Gates:</label>
-            <input type="number" name="gates01" id="gates01">
-            <label for="gates1">Width:</label>
-            <select id="gates1" name="gates1" id="gates1">
-                <option value="" selected>None</option>
-            </select>
-            <label for="gates02">Gates:</label>
-            <input type="number" name="gates02" id="gates02">
-            <label for="gates2">Width:</label>
-            <select id="gates2" name="gates2" id="gates2">
-                <option value="" selected>None</option>
-            </select>
+            <div class="gateInner1Div">
+                <div class="gate2InnerDiv">
+                    <label for="gates01">Gate(s):</label>
+                    <input type="number" name="gates01" id="gates01">
+                </div>
+                <div class="gate2InnerDiv">
+                    <label for="gates1">Width:</label>
+                    <input type="number" id="widthGate1" name="gates1">
+                </div>
+                <div class="gate2InnerDiv">
+                    <section>
+                        <input type="radio" name="gate1Type" value="rolling" /> Rolling Gate
+                        <input type="radio" name="gate1Type" value="door" /> Door Gate
+                    </section>
+                </div>
+            </div>
 
+            <div class="gateInner1Div">
+                <div class="gate2InnerDiv">
+                    <label for="gates02">Gate(s):</label>
+                    <input type="number" name="gates02" id="gates02">
+                </div>
+                <div class="gate2InnerDiv">
+                    <label for="gates2">Width:</label>
+                    <input type="number" id="widthGate2" name="gates2">
+                </div>
+                <div class="gate2InnerDiv">
+                    <section>
+                        <input type="radio" name="gate2Type" value="rolling" /> Rolling Gate
+                        <input type="radio" name="gate2Type" value="door" /> Door Gate
+                    </section>
+                </div>
+            </div>
         </section>
 
         <h3>#7 Add Barb Wire</h3>
@@ -152,6 +172,9 @@
 
             <h3>Barb Wire</h3>
             <p id="barbwirePara"></p>
+
+            <h3>Gate(s) fittings</h3>
+            <p id="gatesPara"></p>
 
             <h3>Concrete</h3>
             <p id="concretePara"></p>

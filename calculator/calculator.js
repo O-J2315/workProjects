@@ -1,12 +1,12 @@
+// Variables
 const types = ['commercial', 'residential'];
 const heights = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 const gauges = [11.5, 11, 9, 8];
 const grades = ['Commercial', 'Residential', 'Industrial'];
 const finishes = ['Galvanized', 'Black', 'Green'];
-const gatewidths = [3, 4, 5, 10, 12];
 
 
-
+//Select instancing 
 const heightElement = document.getElementById('height');
 heights.forEach(height => {
     const option = document.createElement('option');
@@ -39,23 +39,7 @@ finishes.forEach(finish => {
     finishElement.appendChild(option);
 });
 
-const gates1Element = document.getElementById('gates1');
-gatewidths.forEach(width => {
-    const option = document.createElement('option');
-    option.value = width;
-    option.textContent = width;
-    gates1Element.appendChild(option);
-});
-
-const gates2Element = document.getElementById('gates2');
-gatewidths.forEach(width => {
-    const option = document.createElement('option');
-    option.value = width;
-    option.textContent = width;
-    gates2Element.appendChild(option);
-});
-
-
+//Reset Button
 document.getElementById('resetButton').addEventListener('click', () => {
 
     const form = document.getElementById("myForm");
@@ -124,6 +108,24 @@ document.getElementById('submit').addEventListener('click', (event) => {
     let terminalPostsHeight = 3;
     let barbwireHtml = '';
     let braceBands = 4 * stretchCounter;
+    let gate1Type, gate2Type;
+    let numGates01 = document.getElementById('gates01');
+    let numGates02 = document.getElementById('gates02');
+
+    const gate1Radio = document.querySelector('input[name="gate1Type"]:checked');
+    const gate2Radio = document.querySelector('input[name="gate2Type"]:checked');
+
+    if (gate1Radio) {
+        gate1Type = gate1Radio.value;
+    } else {
+        gate1Type = null;
+    }
+    if (gate2Radio) {
+        gate2Type = gate2Radio.value;
+    } else {
+        gate2Type = null;
+    }
+
 
     if (barbWireCheck.checked) {
         braceBands = terminalPosts * 5;
@@ -172,10 +174,36 @@ document.getElementById('submit').addEventListener('click', (event) => {
     const concreteHtml = `<p><strong>${(linePosts+terminalPosts)*2}</strong> -> 50lbs Fast Setting Concrete Bags</p>`;
     document.getElementById('concretePara').innerHTML = concreteHtml;
 
-
-
     document.getElementById("barbwirePara").innerHTML = barbWireHtml;
-
     document.getElementById('results').setAttribute('class', 'resultsDisplay');
+
+    let gatesHtml;
+
+    if (numGates01.value > 0) {
+        let widthGates01 = document.getElementById("widthGate1").value;
+        if (gate1Type == 'rolling') {
+            gatesHtml = `<p><strong>Fittings for ${numGates01.value} ${gate1Type} gate ${widthGates01}ft x ${chainlinkHeight}ft</strong></p>` +
+                `<p><strong>${numGates01.value * 2}</strong>-> Wheels with Brackets</p>` +
+                `<p><strong>${numGates01.value * 2 * 4}</strong>-> Rail Connectors with Brackets</p>` +
+                `<p><strong>${numGates01.value}</strong>-> Gate latch with hole</p>`;
+        } else if (gate1Type == 'door') {
+            gatesHtml = `<p><strong>Fittings for ${numGates01.value} ${gate1Type} gate ${widthGates01}ft x ${chainlinkHeight}ft</strong></p>` +
+                `<p><strong>${numGates01.value * 2}</strong>-> 180° Hinge Brackets</p>` +
+                `<p><strong>${numGates01.value}</strong>-> Gate latch with hole</p>`;
+        }
+
+    } else {
+        console.log("No gates 01");
+        gatesHtml = `<p>No gates for this Job</p>`
+    }
+    if (numGates02.value > 0) {
+        let widthGates02 = document.getElementById("widthGate2").value;
+        console.log(`Gates 02: ${numGates02.value} ${gate1Type} gate ${widthGates02}ft x ${chainlinkHeight}ft`);
+    } else {
+        console.log("No gates 02");
+    }
+
+    document.getElementById("gatesPara").innerHTML = gatesHtml;
+
 
 });

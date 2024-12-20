@@ -99,12 +99,20 @@ input:invalid {
 
 #fenceGates {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
     align-items: center;
     padding: .5rem;
     column-gap: 1rem;
 }
+
+
+/* #fenceGates div {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px red;
+    align-items: center;
+} */
 
 #fenceGates input:nth-child(odd) {
     padding-right: 2rem;
@@ -170,4 +178,19 @@ input:invalid {
     border-top: solid 1px black;
     padding-top: 1rem;
     color: rgb(203, 0, 0);
+}
+
+.gateInner1Div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: .5rem;
+    gap: .5rem;
+    border: solid 1px red;
+    width: 90%;
+}
+
+.gate2InnerDiv {
+    display: flex;
+    border: solid 1px red;
 }
