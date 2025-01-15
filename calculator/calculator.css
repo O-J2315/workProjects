@@ -22,7 +22,8 @@ header {
     border: double 4px rgb(0, 0, 0);
     border-radius: 1rem;
     padding: 1rem;
-    width: 90%;
+    width: 90%; 
+    margin: 0 auto; 
     margin-bottom: 1rem;
 }
 
@@ -186,11 +187,11 @@ input:invalid {
     flex-direction: column;
     padding: .5rem;
     gap: .5rem;
-    border: solid 1px red;
+    /* border: solid 1px red; */
     width: 90%;
 }
 
 .gate2InnerDiv {
     display: flex;
-    border: solid 1px red;
+    /* border: solid 1px red; */
 }

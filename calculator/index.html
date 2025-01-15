@@ -138,6 +138,16 @@
             <input type="checkbox" id="barbWireCheck">
         </section>
 
+        <h3>#8 Add Privacy Slats</h3>
+        <section id="privacySlats">
+            <label for="privacyCheck">Add Privacy Slats</label>
+            <input type="checkbox" id="privacyCheck"  onchange="toggleSlatType()">
+            <label id="slatTypeLabel" for="slatType" style="display: none;">Slat Color</label>
+            <select id="slatType" name="slatType" style="display: none;">
+                <option value="" selected disabled>Select</option>
+            </select>
+        </section>
+
 
         <button type="submit" name="submit" id="submit" class="calculate-button">Calculate</button>
         <button type="button" id="resetButton" class="reset-button">🔄️</button>
@@ -149,8 +159,32 @@
 
     <div class="resultsHidden" id="results">
         <h1>Results</h1>
+
         <h2>Cost</h2>
         <div id="costResults">
+
+            <section>
+
+                <h3>Chain Link Cost</h3>
+                <p id="chainLinkCostPara"></p>
+
+                <h3>Terminal Posts Cost</h3>
+                <p id="terminalPostsCostPara"></p>
+
+                <h3>Gate(s) Cost</h3>
+                <p id="gatesCostPara"></p>
+
+                <h3>Slats Cost</h3>
+                <p id="slatsCostPara"></p>
+
+                <h3>Labor Cost</h3>
+                <p id="laborCostPara"></p>
+
+                <h3>Total Cost</h3>
+                <p id="totalCostPara"></p>
+
+            </section>
+            
 
         </div>
         <h2>Material List</h2>
@@ -172,6 +206,9 @@
 
             <h3>Barb Wire</h3>
             <p id="barbwirePara"></p>
+
+            <h3>Privacy Slats</h3>
+            <p id="slatsPara"></p>
 
             <h3>Gate(s) fittings</h3>
             <p id="gatesPara"></p>
