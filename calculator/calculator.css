@@ -172,13 +172,43 @@ input:invalid {
     display: flex;
     flex-direction: column;
     /* border: solid 1px red; */
-    margin-top: 1rem;
+    margin: 1rem;
+    padding: 1rem;
+    justify-content: center;
 }
 
 #materialListResults h3 {
     border-top: solid 1px black;
     padding-top: 1rem;
     color: rgb(203, 0, 0);
+}
+
+.costSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.costSection h3 {   
+    padding-top: 1rem;
+    color: rgb(203, 0, 0);
+    width: 90%;
+    /* border: solid 1px red; */
+    justify-self: center;
+    padding: 1rem;
+}
+
+.costSection p {
+    width: auto;
+    justify-self: center;
+    /* border: solid 1px red;  */
+    width: 90%; 
+    text-align: left;
 }
 
 .gateInner1Div {

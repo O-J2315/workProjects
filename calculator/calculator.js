@@ -384,10 +384,16 @@ document.getElementById('submit').addEventListener('click', (event) => {
     document.getElementById('slatsPara').innerHTML = privacySlatsHtml;
 
     // Gate-related logic
-    handleGates(chainlinkHeight);
-
-    // Price Calculation
-    calculatePrice(chainlinkTotalArea, linePosts, terminalPosts, chainlinkHeight, privacySlatsBags, isCommercial);
+    const gateParams = handleGates(chainlinkHeight); // Collect necessary gate info
+    calculatePrice(
+        chainlinkTotalArea, 
+        linePosts, 
+        terminalPosts, 
+        chainlinkHeight, 
+        privacySlatsBags, 
+        isCommercial, 
+        gateParams  // Pass the gate params here
+    );
 });
 
 const getBarbWireHtml = () => {
@@ -462,30 +468,41 @@ const generateConcreteHtml = (linePosts, terminalPosts) => {
 
 const handleGates = (chainlinkHeight) => {
     let gatesHtml = '';
-    const numGates01 = document.getElementById('gates01').value;
-    const numGates02 = document.getElementById('gates02').value;
-
+    
+    // Retrieve values for number of gates, gate types, and gate widths
+    const numGates01 = parseInt(document.getElementById('gates01').value) || 0;  // Default to 0 if not a valid number
+    const numGates02 = parseInt(document.getElementById('gates02').value) || 0;
     const gate1Type = document.querySelector('input[name="gate1Type"]:checked')?.value;
     const gate2Type = document.querySelector('input[name="gate2Type"]:checked')?.value;
+    const widthGates01 = parseFloat(document.getElementById("widthGate1").value) || 0;  // Default to 0 if not a valid number
+    const widthGates02 = parseFloat(document.getElementById("widthGate2").value) || 0;
 
-    const widthGates01 = document.getElementById("widthGate1").value;
-    const widthGates02 = document.getElementById("widthGate2").value;
-
-    // Gate 1
+    // Generate HTML for Gate 1
     if (numGates01 > 0) {
         gatesHtml += generateGateHtml(gate1Type, numGates01, widthGates01, chainlinkHeight);
     } else {
         gatesHtml += `<p><strong>No gates for Gate 1</strong></p>`;
     }
 
-    // Gate 2
+    // Generate HTML for Gate 2
     if (numGates02 > 0) {
         gatesHtml += generateGateHtml(gate2Type, numGates02, widthGates02, chainlinkHeight);
     } else {
         gatesHtml += `<p><strong>No gates for Gate 2</strong></p>`;
     }
 
+    // Insert gates HTML into the document
     document.getElementById("gatesPara").innerHTML = gatesHtml;
+
+    // Return all the necessary parameters as an object
+    return {
+        numGates01,
+        numGates02,
+        gate1Type,
+        gate2Type,
+        widthGates01,
+        widthGates02,
+    };
 };
 
 const generateGateHtml = (gateType, numGates, gateWidth, chainlinkHeight) => {
@@ -502,7 +519,7 @@ const generateGateHtml = (gateType, numGates, gateWidth, chainlinkHeight) => {
     return '';
 };
 
-const calculatePrice = (chainlinkTotalArea, linePosts, terminalPosts, chainlinkHeight, privacySlatsBags, isCommercial, numGates01, numGates02, widthGates01, widthGates02) => {
+const calculatePrice = (chainlinkTotalArea, linePosts, terminalPosts, chainlinkHeight, privacySlatsBags, isCommercial, gateParams) => {
     const residentialSQFT = 2.26;
     const residentialTerminalPost = 8.33;
     const residentialChainLinkGate = 23.31;
@@ -522,8 +539,12 @@ const calculatePrice = (chainlinkTotalArea, linePosts, terminalPosts, chainlinkH
     let gatesCost = 0;
     let totalCost = 0;
 
+    const { numGates01, numGates02, widthGates01, widthGates02 } = gateParams;
+
+    // Check if privacy slats are selected
     const addSlats = document.getElementById('privacyCheck')?.checked;
 
+    // Perform calculations based on whether it's a commercial or residential project
     if (isCommercial) {
         chainLinkCost = chainlinkTotalArea * commercialSQFT;
         terminalPostsCost = terminalPosts * (chainlinkHeight + 2) * commercialTerminalPost;
@@ -544,13 +565,42 @@ const calculatePrice = (chainlinkTotalArea, linePosts, terminalPosts, chainlinkH
         totalCost = chainLinkCost + terminalPostsCost + laborCost + slatsCost + gatesCost;
     }
 
+    console.log(gatesCost);
+    console.log(totalCost);
+
     // Update HTML with calculated prices
     updatePriceDisplay(chainLinkCost, terminalPostsCost, laborCost, slatsCost, gatesCost, totalCost);
 };
 
 const calculateGatesCost = (numGates01, numGates02, widthGates01, widthGates02, gateCost, chainlinkHeight) => {
-    return numGates01 * widthGates01 * chainlinkHeight * gateCost +
-        numGates02 * widthGates02 * chainlinkHeight * gateCost;
+    console.log(gateCost);
+    console.log(chainlinkHeight);
+    console.log(numGates01);
+    console.log(numGates02);
+    console.log(widthGates01);
+    console.log(widthGates02);
+
+    // Calculate costs for both Gate 1 and Gate 2
+    let costGates1 = 0;
+    let costGates2 = 0;
+
+    if (numGates01 <= 0) {
+        costGates1 = 0;
+    } else {
+        costGates1 = numGates01 * widthGates01 * chainlinkHeight * gateCost;
+    }
+
+    if (numGates02 <= 0) {
+        costGates2 = 0;
+    } else {
+        costGates2 = numGates02 * widthGates02 * chainlinkHeight * gateCost;
+    }
+
+    console.log(costGates1);
+    console.log("Gate cost: " + (costGates1 + costGates2));
+
+    // Return the total gate cost
+    return costGates1 + costGates2;
 };
 
 const updatePriceDisplay = (chainLinkCost, terminalPostsCost, laborCost, slatsCost, gatesCost, totalCost) => {
