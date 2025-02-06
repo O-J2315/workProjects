@@ -523,7 +523,7 @@ const calculatePrice = (chainlinkTotalArea, linePosts, terminalPosts, chainlinkH
     const residentialSQFT = 2.26;
     const residentialTerminalPost = 8.33;
     const residentialChainLinkGate = 23.31;
-    const residentialLabor = 420;
+    const residentialLabor = 550;
 
     const commercialSQFT = 3.06;
     const commercialTerminalPost = 10.09;
@@ -565,7 +565,7 @@ const calculatePrice = (chainlinkTotalArea, linePosts, terminalPosts, chainlinkH
         totalCost = chainLinkCost + terminalPostsCost + laborCost + slatsCost + gatesCost;
     }
 
-    console.log(gatesCost);
+    console.log(gatesCost);          
     console.log(totalCost);
 
     // Update HTML with calculated prices
